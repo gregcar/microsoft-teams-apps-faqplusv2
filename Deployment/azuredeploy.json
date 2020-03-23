@@ -79,7 +79,7 @@
         "Standard",
         "Premium"
       ],
-      "defaultValue": "Standard",
+      "defaultValue": "Premium",
       "metadata": {
         "description": "The pricing tier for the hosting plan."
       }
@@ -91,7 +91,7 @@
         "2",
         "3"
       ],
-      "defaultValue": "2",
+      "defaultValue": "1",
       "metadata": {
         "description": "The size of the hosting plan (small, medium, or large)."
       }
@@ -285,7 +285,7 @@
             },
             {
               "name": "QnAMakerApiEndpointUrl",
-              "value": "[concat('https://', variables('qnaMakerAccountName'),'.cognitiveservices.azure.com')]"
+              "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts/', variables('qnaMakerAccountName')), '2017-04-18').endpoint]"
             },
             {
               "name": "ApplicationInsightsLogLevel",
@@ -511,7 +511,7 @@
       "properties": {
         "replicaCount": 1,
         "partitionCount": 1,
-        "hostingMode": "default"
+        "hostingMode": "Default"
       },
       "sku": {
         "name": "[toLower(variables('azureSearchSkuValue'))]"
@@ -561,7 +561,7 @@
             },
             {
               "name": "QnAMakerApiUrl",
-              "value": "[concat('https://', variables('qnaMakerAccountName'),'.cognitiveservices.azure.com')]"
+              "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts/', variables('qnaMakerAccountName')), '2017-04-18').endpoint]"
             },
             {
               "name": "QnAMakerSubscriptionKey",
