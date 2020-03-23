@@ -285,7 +285,7 @@
             },
             {
               "name": "QnAMakerApiEndpointUrl",
-              "value": "https://westus.api.cognitive.microsoft.com"
+              "value": "[concat('https://', variables('qnaMakerAccountName'),'.cognitiveservices.azure.com')]"
             },
             {
               "name": "ApplicationInsightsLogLevel",
@@ -491,7 +491,8 @@
       "properties": {
         "apiProperties": {
           "qnaRuntimeEndpoint": "[concat('https://', reference(resourceId('Microsoft.Web/sites', variables('qnaMakerAppServiceName'))).hostNames[0])]"
-        }
+        },
+        "customSubDomainName": "[variables('qnaMakerAccountName')]"
       },
       "dependsOn": [
         "[resourceId('Microsoft.Web/Sites', variables('qnaMakerAppServiceName'))]",
@@ -670,8 +671,8 @@
             "UserAppInsightsKey": "[reference(resourceId('Microsoft.Insights/components/', variables('qnaMakerAppInsightsName')), '2015-05-01').InstrumentationKey]",
             "UserAppInsightsName": "[variables('qnaMakerAppInsightsName')]",
             "UserAppInsightsAppId": "[reference(resourceId('Microsoft.Insights/components/', variables('qnaMakerAppInsightsName')), '2015-05-01').AppId]",
-            "PrimaryEndpointKey": "[concat(variables('qnaMakerAppServiceName'), '-PrimaryEndpointKey')]",
-            "SecondaryEndpointKey": "[concat(variables('qnaMakerAppServiceName'), '-SecondaryEndpointKey')]",
+            "PrimaryEndpointKey": "[listKeys(resourceId('Microsoft.CognitiveServices/accounts/', variables('qnaMakerAccountName')), '2017-04-18').key1]",
+            "SecondaryEndpointKey": "[listKeys(resourceId('Microsoft.CognitiveServices/accounts/', variables('qnaMakerAccountName')), '2017-04-18').key2]",
             "DefaultAnswer": "No good match found in KB.",
             "QNAMAKER_EXTENSION_VERSION": "latest"
           }
