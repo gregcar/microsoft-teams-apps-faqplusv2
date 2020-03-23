@@ -561,7 +561,7 @@
             },
             {
               "name": "QnAMakerApiUrl",
-              "value": "https://westus.api.cognitive.microsoft.com"
+              "value": "[concat('https://', variables('qnaMakerAccountName'),'.cognitiveservices.azure.com')]"
             },
             {
               "name": "QnAMakerSubscriptionKey",
